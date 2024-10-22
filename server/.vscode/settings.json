@@ -1,0 +1,13 @@
+{
+    "go.formatTool": "goimports",
+    "go.lintTool": "golint",
+    "go.vetOnSave": "package",
+    "go.lintOnSave": "package",
+    "go.useLanguageServer": true,
+    "editor.formatOnSave": true,
+    "[go]": {
+      "editor.insertSpaces": true,
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "golang.go"
+    }
+} 
