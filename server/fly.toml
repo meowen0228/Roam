@@ -1,0 +1,22 @@
+# chat-backend/fly.toml
+app = "chat-backend-0228"
+
+[build]
+  context = "./"
+  dockerfile = "Dockerfile"
+
+[env]
+  DB_USER = "chat_user"
+  DB_PASSWORD = "userpassword"
+  DB_HOST = "chat-db-0228.internal"
+  DB_PORT = "3306"
+  DB_NAME = "chat_platform"
+  GOOGLE_CLIENT_ID = "560294902841-02tk8i16s0882fv18u6p9rj32h96395o.apps.googleusercontent.com"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 8080

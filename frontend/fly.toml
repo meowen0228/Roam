@@ -1,0 +1,18 @@
+# chat-frontend/fly.toml
+app = "chat-frontend"
+
+[build]
+  context = "./"
+  dockerfile = "Dockerfile"
+
+[env]
+  VITE_API_URL = "http://chat-backend-0228.internal:8080/api"
+  VITE_GOOGLE_AUTH_CLIENT_ID = "560294902841-02tk8i16s0882fv18u6p9rj32h96395o.apps.googleusercontent.com"
+
+[[services]]
+  internal_port = 80
+  protocol = "tcp"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 5173
