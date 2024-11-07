@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: chat_user
+      MYSQL_PASSWORD: userpassword
+      MYSQL_DATABASE: chat_platform
+    volumes:
+      - db_data:/var/lib/mysql
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USER: chat_user
+      DB_PASSWORD: userpassword
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: chat_platform
+      GOOGLE_CLIENT_ID: 560294902841-02tk8i16s0882fv18u6p9rj32h96395o.apps.googleusercontent.com
+    depends_on:
+      - db
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    environment:
+      VITE_API_URL: http://backend:8080/api
+      VITE_GOOGLE_AUTH_CLIENT_ID: 560294902841-02tk8i16s0882fv18u6p9rj32h96395o.apps.googleusercontent.com
+
+volumes:
+  db_data:
